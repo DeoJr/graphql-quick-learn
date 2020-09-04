@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<config>
+    <menu>
+        <add id="Webjump_LogisticsConfig::logistics" title="Logistics" translate="title" module="Webjump_LogisticsConfig" sortOrder="35" resource="Webjump_LogisticsConfig::logistics" />
+    </menu>
+</config>
+

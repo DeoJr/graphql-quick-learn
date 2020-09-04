@@ -1,0 +1,53 @@
+version: '3.5'
+
+services:
+    php:
+        container_name: php_ql
+        image: webjump/magento2-php:7.3.16
+        volumes:
+            - ./:/var/www/html
+            - ./.docker/config/php/from-docker-configuration.ini:/usr/local/etc/php/conf.d/from-docker-configuration.ini
+        depends_on:
+            - mysql
+        networks:
+            - net_ql
+
+    mysql:
+        container_name: mysql_ql
+        image: mysql:5.7.29
+        environment:
+            MYSQL_ROOT_PASSWORD: magento
+            MYSQL_USER: magento
+            MYSQL_PASSWORD: magento
+            MYSQL_DATABASE: magento
+        volumes:
+            - mysql:/var/lib/mysql
+        ports:
+            - 3306:3306
+        networks:
+            - net_ql
+
+    nginx:
+        container_name: nginx_ql
+        image: nginx:1.17.9-alpine
+        volumes:
+            - ./:/var/www/html
+            - ./.docker/config/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        ports:
+            - 80:80
+        depends_on:
+            - php
+        networks:
+            - net_ql
+
+networks:
+    net_ql:
+        driver: bridge
+
+volumes:
+    mysql:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: ${PWD}/.docker/mysql/data

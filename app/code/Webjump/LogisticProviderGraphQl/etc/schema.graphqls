@@ -1,0 +1,36 @@
+type Query {
+    listLogisticProvider: [LogisticProvider!] @resolver(class: "Webjump\\LogisticProviderGraphQl\\Model\\Resolver\\ListLogisticProvider")
+    logisticProviderById(logistic_provider_id: Int!): LogisticProvider @resolver(class: "Webjump\\LogisticProviderGraphQl\\Model\\Resolver\\LogisticProviderById")
+}
+
+type Mutation {
+    createLogisticProvider(input: LogisticProviderInput): LogisticProdiverOutput @resolver(class: "Webjump\\LogisticProviderGraphQl\\Model\\Resolver\\CreateLogisticProvider")
+    removeLogisticProvider(input: RemoveLogisticProviderInput): RemoveLogisticProviderOutput @resolver(class: "Webjump\\LogisticProviderGraphQl\\Model\\Resolver\\RemoveLogisticProvider")
+}
+
+input LogisticProviderInput {
+    intelipost_id: Int!
+    sap_id: Int!
+    provider_name: String!
+    tracking_url: String
+}
+
+type LogisticProdiverOutput {
+    logistic_provider: LogisticProvider
+}
+
+input RemoveLogisticProviderInput {
+    logistic_provider_id: Int!
+}
+
+type RemoveLogisticProviderOutput {
+    status: Boolean!
+}
+
+type LogisticProvider {
+    id: Int @doc(description: "Id")
+    intelipost_id: Int @doc(description: "Intelipost Id")
+    sap_id: Int @doc(description: "SAP Id")
+    provider_name: String @doc(description: "Provider name")
+    tracking_url: String @doc(description: "Tracking url")
+}

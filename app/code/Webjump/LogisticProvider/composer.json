@@ -1,0 +1,21 @@
+{
+  "name": "Webjump/logistic-provider",
+  "version": "1.0.0",
+  "description": "N/A",
+  "type": "magento2-module",
+  "require": {
+    "magento/framework": "*",
+    "magento/framework": "Webjump/logistics-config"
+  },
+  "license": [
+    "Proprietary"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Webjump\\LogisticsConfig\\": ""
+    }
+  }
+}
